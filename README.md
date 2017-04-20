@@ -22,5 +22,5 @@ Vpqrs is a repo for useful scripts for *ab-initio* calculations.
 
 # Contents #
 
-  - `src/vtstscripts-930/`:
+  - `src/vtstscripts`:
      These are useful scripts stolen from [VTST Tools](http://theory.cm.utexas.edu/vtsttools/scripts.html)
