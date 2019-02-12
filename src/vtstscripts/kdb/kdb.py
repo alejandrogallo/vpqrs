@@ -75,7 +75,9 @@ class Kdb():
             box:    the box that defines the boundary conditions
             ibox:   the inverse of the box. This will be calcluated if not provided.
         """
-        if ibox == None:    
+        #if ibox == None:    
+        #if not hasattr(ibox, 'shape'):
+        if type(ibox) != numpy.ndarray and type(ibox) != list and type(ibox) != tuple: #MJW fix
             ibox = numpy.linalg.inv(box)
         vdir = numpy.dot(r, ibox)
         vdir = (vdir % 1.0 + 1.5) % 1.0 - 0.5

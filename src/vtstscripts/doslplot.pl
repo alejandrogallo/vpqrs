@@ -190,7 +190,7 @@ sub sp_plot{
         }
         print GNUPLOT " w l lt 3 lw 2.0,\\\n";
     }
-    print GNUPLOT "   \"DOS0\" u 1:2 w lp lt 1 lw 2.0 pt 7 ps 0.4\n";
+    print GNUPLOT "   \"DOS0\" u 1:(\$2-\$3) w lp lt 1 lw 2.0 pt 7 ps 0.4\n";
     close GNUPLOT;
 
     # Plot graphs with gnuplot and show with ghostview
@@ -275,7 +275,7 @@ sub pd_plot{
         }
         print GNUPLOT " w l lt 3 lw 2.0,\\\n";
     }
-    print GNUPLOT "   \"DOS0\" u 1:2 w lp lt 1 lw 2.0 pt 7 ps 0.4\n";
+    print GNUPLOT "   \"DOS0\" u 1:(\$2-\$3) w lp lt 1 lw 2.0 pt 7 ps 0.4\n";
     close GNUPLOT;
 
     # Plot graphs with gnuplot and show with ghostview

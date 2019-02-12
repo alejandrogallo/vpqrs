@@ -10,17 +10,19 @@ open (IN2,$args[1]) || die ("Can't open file $!");
 open (OUT,">PARCHG_avg");
 
 for ($i=0;$i<2;$i++) {
-   $line1=<IN1>;
-   $line2=<IN2>;
-   $header1.=$line1;
+    $line1=<IN1>;
+    $line2=<IN2>;
+    $header1.=$line1;
 }
 
 for ($i=0;$i<3;$i++) {
-   $line1=<IN1>;
-   @line1=split(/\s+/,$line1);
-   $vector[$i]=$line1[$i+1];
-   $line2=<IN2>;
-   $header1.=$line1;
+    $line1=<IN1>;
+    $line1 =~ s/^\s+//;
+    @line1=split(/\s+/,$line1);
+    $vector[$i]=$line1[$i+1];
+    $line2=<IN2>;
+    $line2 =~ s/^\s+//;
+    $header1.=$line1;
 }
 
 print "Note: periodic averaging of ionic coordinates assumes orthogonal cell.\n";
@@ -30,6 +32,8 @@ $atoms1=<IN1>;
 $header1.=$atoms1;
 $atoms2=<IN2>;
 
+$atoms1 =~ s/^\s+//;
+$atoms2 =~ s/^\s+//;
 @atoms1=split(/\s+/,$atoms1);
 @atoms2=split(/\s+/,$atoms2);
 
@@ -82,16 +86,13 @@ $points1=<IN1>;
 $header1.=$points1;
 $points2=<IN2>;
 
-@points1=split(/\s+/,$points1);
-@points2=split(/\s+/,$points2);
+$points1 =~ s/^\s+//;
+$points2 =~ s/^\s+//;
+@points1 = split(/\s+/,$points1);
+@points2 = split(/\s+/,$points2);
 
-$psum1=1;
-$psum2=1;
-
-for ($i=1;$i<@points1;$i++) {
-   $psum1*=$points1[$i];
-   $psum2*=$points2[$i];
-}
+$psum1 = $points1[0]*$points1[1]*$points1[2];
+$psum2 = $points2[0]*$points2[1]*$points2[2];
 
 print "Points in file1: ".$psum1.", Points in file2: ".$psum2."\n";
 
@@ -100,17 +101,20 @@ if ($psum1 != $psum2) {die ("Number of points not same in two files!");}
 print OUT $header1;
 
 for ($i=0;$i<$psum1/10;$i++) {
-   $line1=<IN1>;
-   $line2=<IN2>;
-   @line1=split(/\s+/,$line1);
-   @line2=split(/\s+/,$line2);
-   for ($j=1;$j<@line1;$j++) {
-       $line1[$j]=($line2[$j]+$line1[$j])/2;
-   }
-   printf OUT "%20.10e %20.10e %20.10e %20.10e %20.10e %20.10e %20.10e %20.10e %20.10e %20.10e\n",$line1[1],$line1[2],$line1[3],$line1[4],$line1[5],$line1[6],$line1[7],$line1[8],$line1[9],$line1[10];  
+    $line1=<IN1>;
+    $line1 =~ s/^\s+//;
+    $line2=<IN2>;
+    $line2 =~ s/^\s+//;
+    @line1=split(/\s+/,$line1);
+    @line2=split(/\s+/,$line2);
+    for ($j=0;$j<@line1;$j++) {
+         $line1[$j]=($line2[$j]+$line1[$j])/2;
+    }
+#    printf OUT "%20.10e %20.10e %20.10e %20.10e %20.10e %20.10e %20.10e %20.10e %20.10e %20.10e\n",$line1[0],$line1[1],$line1[2],$line1[3],$line1[4],$line1[5],$line1[6],$line1[7],$line1[8],$line1[9];  
+    printf OUT " %20.10E" x @line1 . "\n", @line1;
 
 }
 
-close(OUT);
-close(IN2);
 close(IN1);
+close(IN2);
+close(OUT);

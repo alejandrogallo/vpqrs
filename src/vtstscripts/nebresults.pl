@@ -3,7 +3,7 @@
 
 # 29-05-2003
 
-# After vto has been run, go into the dir from vto <dir>.
+# After vfin.pl has been run, go into the dir from vfin.pl <dir>.
 # All the OUTCARs should now be zipped.
 
 # nebmovie.pl should use CONTCARs not POSCARs.

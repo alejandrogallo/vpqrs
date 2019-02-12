@@ -69,7 +69,7 @@
     $j = $i+$sh ;
     $l1 = $p1[$j] ; chomp($l1) ; $l1=~s/^\s+//g ;
     @l1=split /\s+/,$l1 ;
-    print "$l1 \n";
+    # print "$l1 \n";
     $l2 = $p2[$j] ; chomp($l2) ; $l2=~s/^\s+//g ; @l2=split /\s+/,$l2 ;
 # pbc
     $dx = $l1[0]-$l2[0] ; while ($dx > 0.5){$dx -= 1.0 ;} while ($dx < -0.5){$dx += 1.0 ;}

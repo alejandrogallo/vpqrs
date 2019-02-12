@@ -153,7 +153,9 @@ class LocalDB():
     # this function is only to be used inside add_process()    
     def add_atoms(self, atoms, mode, conn):
         # if mode = None, create array of zeros.
-        if mode == None:
+        #if mode == None:
+        #if not hasattr(mode, 'shape'):
+        if type(mode) != numpy.ndarray and type(mode) != list and type(mode) != tuple: # MJW fix
             mode = numpy.zeros((len(atoms),3))
         # get important data from ase.Atoms instance
         symbols     = atoms.get_chemical_symbols()

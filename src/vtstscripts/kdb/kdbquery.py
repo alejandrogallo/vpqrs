@@ -133,7 +133,8 @@ class KdbQuery(Kdb):
             mirrored = "not mirrored"
             if entry["mirror"]:
                 mirrored = "mirrored"
-            print "checking", name, "with id:", entry['id'], mirrored
+            # print "checking", name, "with id:", entry['id'], mirrored
+            print "KDB checking entry:", entry['id'], "(",mirrored,")"
 
             # Load the minimum.
             kdbmin = copy.deepcopy(entry['minimum'])        
@@ -244,9 +245,19 @@ class KdbQuery(Kdb):
             # Loop over each mapping and try to find a rotation that aligns the
             # kdb configuration with the query configuration.
             for mapping in mappings:
-            
+                
+                #print "in mappings loop"
+                #print "mapping values: ",mapping.values()
+
                 reactantrot = self.clump(reactant, mapping.values(), nf)
+
+                # If no neighbors found, go to next mapping
+                if reactantrot is None:
+                    continue
             
+                #print "mapping values, after clump: ",mapping.values()
+                #print "reactantrot: ",reactantrot
+
                 # Make a copy of kdbmin for rotation and put it in the box.
                 kdbrot = kdbmin.copy()
                 kdbrot.cell = reactant.cell.copy()
@@ -402,5 +413,6 @@ class KdbQuery(Kdb):
                 entryMatches += 1
                 numMatches += 1
 
-            print "%10d" % entryMatches
+            #print "%10d" % entryMatches
+            print "KDB matches: ", entryMatches
     

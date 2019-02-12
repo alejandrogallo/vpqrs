@@ -27,7 +27,8 @@ class LocalInsert(KdbInsert):
         db.add_process(args['or'], args['os'], args['op'], args['om'],
                        args['r'], args['s'], args['p'], args['m'], args['ma'])
         # Indicate that the process was inserted successfully.
-        print "good"
+        #print "good"
+        print "KDB insert success"
         return "good"
 
 
